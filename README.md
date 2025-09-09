@@ -23,9 +23,10 @@ This project showcases my skills, education, experience, projects, and certifica
 - **Deployment**: GitHub Pages (or any static hosting)
 
 ## 📂 Project Structure
+```bash
 My_Portfolio/
-│── index.html # Main portfolio page
-│── styles.css # Styling and animations
-│── script.js # Interactivity & scroll effects
-│── pic.jpg # Profile image
-│── assets/ # Certificates, project images, etc.
+│── index.html      # Main portfolio page
+│── styles.css      # Styling and animations
+│── script.js       # Interactivity & scroll effects
+│── pic.jpg         # Profile image
+│── assets/         # Certificates, project images, etc.
