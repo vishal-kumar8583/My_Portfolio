@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vishal Kumar - Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Immediate scroll reset -->
+    <script>
+        // Force scroll to top immediately when page loads
+        window.scrollTo(0, 0);
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+        // Disable browser scroll restoration
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+    </script>
+    
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="#home">Vishal Kumar</a>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#skills" class="nav-link">Skills</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#experience" class="nav-link">Experience</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#education" class="nav-link">Education</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#projects" class="nav-link">Projects</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#certifications" class="nav-link" id="navCertificationsBtn">Certifications</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#activities" class="nav-link">Activities</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contact" class="nav-link">Contact</a>
+                </li>
+            </ul>
+            <div class="nav-controls">
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero with-divider">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">
+                        Hi, I'm <span class="highlight">Vishal Kumar</span>
+                    </h1>
+                    <h2 class="hero-subtitle"> Developer</h2>
+                    <p class="hero-description">
+                        Passionate about creating innovative web solutions using modern technologies. 
+                        Specialized in MERN stack, cloud computing, and AI integration.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#projects" class="btn btn-primary">View My Work</a>
+                        <a href="#resume" class="btn btn-resume" id="viewResumeBtn">
+                            <i class="fas fa-file-alt"></i> View Resume
+                        </a>
+                        <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="profile-card">
+                        <div class="profile-particles">
+                            <div class="profile-particle"></div>
+                            <div class="profile-particle"></div>
+                            <div class="profile-particle"></div>
+                            <div class="profile-particle"></div>
+                            <div class="profile-particle"></div>
+                            <div class="profile-particle"></div>
+                        </div>
+                        <div class="profile-img">
+                            <img src="pic.jpg" alt="Vishal Kumar" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <div class="scroll-arrow"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about bg-anim with-divider">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-modern reveal-scale" id="aboutCard">
+                <div class="about-content">
+                    <div class="about-header">
+                        <div class="about-avatar-modern">
+                            <img src="pic.jpg" alt="Vishal Kumar" />
+                        </div>
+                        <div class="about-intro-modern reveal-left">
+                            <h3>Hi, I'm Vishal Kumar! 👨‍💻</h3>
+                            <p class="about-lead-modern">A passionate and adaptable tech enthusiast currently pursuing my Master's in Computer Applications at Lovely Professional University. I specialize in full-stack web development, AI integration, and cloud computing.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="about-body">
+                        <div class="about-focus reveal-left">
+                            <h4><i class="fas fa-target"></i> What Drives Me</h4>
+                            <p class="about-text-modern">I'm passionate about creating innovative web solutions that solve real-world problems. My approach combines technical excellence with user-centered design, ensuring that every application I build is both functional and intuitive.</p>
+                        </div>
+                        
+                        <div class="about-values reveal-up">
+                            <h4><i class="fas fa-lightbulb"></i> My Approach</h4>
+                            <ul class="about-focus-list">
+                                <li><strong>Problem-Solving:</strong> Breaking down complex challenges into manageable solutions</li>
+                                <li><strong>Continuous Learning:</strong> Staying updated with latest technologies and best practices</li>
+                                <li><strong>Collaboration:</strong> Working effectively in team environments and learning from others</li>
+                                <li><strong>Quality Focus:</strong> Writing clean, maintainable code with attention to detail</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="about-goals reveal-right">
+                            <h4><i class="fas fa-compass"></i> Looking Forward</h4>
+                            <p class="about-text-modern">I'm always eager to take on new challenges that push my boundaries and allow me to contribute to meaningful projects. My goal is to grow as a developer while building solutions that make a positive impact in the tech industry.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills with-divider">
+        <div class="container">
+            <h2 class="section-title">Skills & Technologies</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3><i class="fas fa-code"></i> Programming Languages</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <span>C++</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span>JavaScript</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span>Java</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="80%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span>Python</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="85%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-laptop-code"></i> Frameworks & Libraries</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <span>React.js</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="88%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span>Node.js</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span>Django</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="82%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span>Bootstrap</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="90%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-database"></i> Databases & Tools</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <span>MongoDB</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span>MySQL</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="80%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span>Azure</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="75%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span>Git/GitHub</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="90%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="experience bg-anim with-divider">
+        <div class="container">
+            <h2 class="section-title">Professional Experience</h2>
+            <div class="experience-content">
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <div class="experience-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <div class="experience-info">
+                            <h3>AICTE – Microsoft Future Ready Talent Program</h3>
+                            <p class="experience-date">June 2025 - July 2025</p>
+                            <p class="experience-type">Virtual Internship</p>
+                        </div>
+                    </div>
+                    <div class="experience-details">
+                        <p>Completed a 4-week intensive virtual internship focused on cloud computing, AI integration, and modern web development using Microsoft Azure services.</p>
+                        <ul>
+                            <li>Built a capstone project based on real-world problem statements using MERN stack and Azure tools</li>
+                            <li>Implemented secure user authentication and data handling in the project</li>
+                            <li>Gained hands-on experience with Azure App Services and Azure Cognitive Services</li>
+                            <li>Learned Git, DevOps pipelines, and collaboration tools used in modern tech teams</li>
+                        </ul>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Azure</span>
+                            <span class="tech-tag">MERN</span>
+                            <span class="tech-tag">Cloud Services</span>
+                        </div>
+                        <div style="margin-top: 0.8rem;">
+                            <a class="btn btn-outline open-image" data-image="Microsoft certificate.jpg" tabindex="0" role="button" aria-label="View Microsoft Internship certificate">View Certificate</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="education bg-anim with-divider">
+        <div class="container">
+            <h2 class="section-title">Education</h2>
+            <div class="education-content">
+                <div class="education-card">
+                    <div class="education-header">
+                        <div class="education-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="education-info">
+                            <h3>Lovely Professional University</h3>
+                            <p class="education-degree">Masters of Computer Applications</p>
+                            <p class="education-date">August 2024 - Present</p>
+                            <p class="education-cgpa">CGPA: 7.9</p>
+                        </div>
+                    </div>
+                    <div class="education-details">
+                        <p>Currently pursuing Master's degree in Computer Applications with focus on advanced programming concepts, software engineering, and modern web technologies.</p>
+                    </div>
+                </div>
+                <div class="education-card">
+                    <div class="education-header">
+                        <div class="education-icon">
+                            <i class="fas fa-university"></i>
+                        </div>
+                        <div class="education-info">
+                            <h3>University of Rajasthan</h3>
+                            <p class="education-degree">Bachelor of Computer Applications</p>
+                            <p class="education-date">July 2021 - June 2024</p>
+                            <p class="education-cgpa">CGPA: 7.2</p>
+                        </div>
+                    </div>
+                    <div class="education-details">
+                        <p>Completed undergraduate studies in Computer Applications, gaining strong foundation in programming languages, database management, and software development principles.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects bg-anim with-divider">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card reveal">
+                    <div class="project-image">
+                        <i class="fas fa-dumbbell"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>FitLife – Gym & Health Web Application</h3>
+                        <p class="project-date">May 2025</p>
+                        <p>Developed a responsive and interactive fitness website focused on gym and health-related content with MongoDB database and Node.js backend.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">HTML</span>
+                            <span class="tech-tag">CSS</span>
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">React.js</span>
+                            <span class="tech-tag">MongoDB</span>
+                            <span class="tech-tag">Node.js</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="btn btn-outline">View Project</a>
+                            <a href="#" class="btn btn-outline">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card reveal">
+                    <div class="project-image">
+                        <i class="fas fa-film"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>MoviesMosaic - Movie Exploration Web App</h3>
+                        <p class="project-date">July 2025</p>
+                        <p>Developed using Django, allowing users to explore movies, submit reviews, and provide rankings with user authentication and dynamic content management.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Django</span>
+                            <span class="tech-tag">HTML</span>
+                            <span class="tech-tag">CSS</span>
+                            <span class="tech-tag">JavaScript</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="btn btn-outline">View Project</a>
+                            <a href="#" class="btn btn-outline">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificates Section -->
+    <section id="certifications" class="certificates with-divider">
+        <div class="container">
+            <h2 class="section-title">Certifications</h2>
+            <div class="certificates-grid">
+                <div class="certificate-card open-image" data-image="C++ from iamNeo.jpg" tabindex="0" role="button" aria-label="View C/C++ certificate">
+                    <i class="fas fa-certificate"></i>
+                    <h3>C/C++ Programming</h3>
+                    <p>Samyak IT Solutions</p>
+                </div>
+                <div class="certificate-card open-image" data-image="sql.jpg" tabindex="0" role="button" aria-label="View SQL certificate">
+                    <i class="fas fa-database"></i>
+                    <h3>SQL Database</h3>
+                    <p>HackerRank</p>
+                </div>
+                <div class="certificate-card open-image" data-image="NetworkingBasics.jpg" tabindex="0" role="button" aria-label="View NetworkingBasics certificate">
+                    <i class="fas fa-network-wired"></i>
+                    <h3>Networking Basics</h3>
+                    <p>Cisco</p>
+                </div>
+                <div class="certificate-card open-image" data-image="Java Certificate.jpg" tabindex="0" role="button" aria-label="View Java certificate">
+                    <i class="fab fa-java"></i>
+                    <h3>Java Programming</h3>
+                    <p>Vtech Integrated Solutions</p>
+                </div>
+                <div class="certificate-card open-image" data-image="Infosys Python.jpg" tabindex="0" role="button" aria-label="View Python certificate">
+                    <i class="fab fa-python"></i>
+                    <h3>Python Programming</h3>
+                    <p>Infosys</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Extra Curricular Activities Section -->
+    <section id="activities" class="activities bg-anim with-divider">
+        <div class="container">
+            <h2 class="section-title">Extra Curricular Activities</h2>
+            <div class="activities-grid">
+                <div class="activity-card">
+                    <div class="activity-header">
+                        <div class="activity-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="activity-info">
+                            <h3>Tata Group Data Analytics Job Simulation</h3>
+                            <p class="activity-date">2025</p>
+                            <p class="activity-type">Job Simulation</p>
+                        </div>
+                    </div>
+                    <div class="activity-details">
+                        <p>Completed a job simulation involving AI-powered data analytics and strategy development for the Financial Services team at Tata iQ.</p>
+                        <ul>
+                            <li>Conducted exploratory data analysis (EDA) using GenAI tools to assess data quality and identify risk indicators</li>
+                            <li>Proposed and justified an initial no-code predictive modeling framework to assess customer delinquency risk</li>
+                            <li>Designed an AI-driven collections strategy leveraging agentic AI and automation</li>
+                            <li>Incorporated ethical AI principles, regulatory compliance, and scalable implementation frameworks</li>
+                        </ul>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Data Analytics</span>
+                            <span class="tech-tag">AI</span>
+                            <span class="tech-tag">GenAI</span>
+                            <span class="tech-tag">Predictive Modeling</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="activity-card">
+                    <div class="activity-header">
+                        <div class="activity-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div class="activity-info">
+                            <h3>Debate Competition</h3>
+                            <p class="activity-date">2022-2024</p>
+                            <p class="activity-type">College Level</p>
+                        </div>
+                    </div>
+                    <div class="activity-details">
+                        <p>Participated in various college-level debate competitions, which helped build strong communication and critical thinking skills.</p>
+                        <ul>
+                            <li>Enhanced public speaking abilities and confidence</li>
+                            <li>Developed critical thinking and argumentation skills</li>
+                            <li>Improved research and presentation capabilities</li>
+                            <li>Built teamwork and collaboration skills</li>
+                        </ul>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Public Speaking</span>
+                            <span class="tech-tag">Critical Thinking</span>
+                            <span class="tech-tag">Research</span>
+                            <span class="tech-tag">Teamwork</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="activity-card">
+                    <div class="activity-header">
+                        <div class="activity-icon">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <div class="activity-info">
+                            <h3>National & Renowned Shot in Shooting</h3>
+                            <p class="activity-date">2020-2023</p>
+                            <p class="activity-type">Sports Achievement</p>
+                        </div>
+                    </div>
+                    <div class="activity-details">
+                        <p>Achieved recognition in shooting sports at national and renowned levels, demonstrating discipline, focus, and precision.</p>
+                        <ul>
+                            <li>Developed exceptional focus and concentration skills</li>
+                            <li>Built mental resilience and stress management abilities</li>
+                            <li>Enhanced hand-eye coordination and precision</li>
+                            <li>Demonstrated commitment and dedication to excellence</li>
+                        </ul>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Focus</span>
+                            <span class="tech-tag">Discipline</span>
+                            <span class="tech-tag">Precision</span>
+                            <span class="tech-tag">Achievement</span>
+                        </div>
+                        <div style="margin-top: 0.8rem;">
+                            <a class="btn btn-outline open-image" data-image="National.jpg" tabindex="0" role="button" aria-label="View Shooting certificate">View Certificate</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="activity-card">
+                    <div class="activity-header">
+                        <div class="activity-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <div class="activity-info">
+                            <h3>Code-A-Hunt 2.0 – Hackathon</h3>
+                            <p class="activity-date">State-level</p>
+                            <p class="activity-type">Inter‑University Hackathon</p>
+                        </div>
+                    </div>
+                    <div class="activity-details">
+                        <p>Had an amazing time participating in Code‑A‑Hunt 2.0! It was a fantastic opportunity to challenge myself, collaborate with brilliant minds, and apply my skills to solve real‑world problems. Excited for what’s next!</p>
+                        <ul>
+                            <li>Worked end‑to‑end from ideation to prototype</li>
+                            <li>Collaborated closely with teammates under time constraints</li>
+                            <li>Focused on building a practical, user‑centric solution</li>
+                        </ul>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Hackathon</span>
+                            <span class="tech-tag">Innovation</span>
+                            <span class="tech-tag">Teamwork</span>
+                            <span class="tech-tag">Tech</span>
+                        </div>
+                        <div style="margin-top: 0.8rem;">
+                            <a class="btn btn-outline open-image" data-image="hackathone.png" tabindex="0" role="button" aria-label="View Hackathon certificate">View Certificate</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact bg-anim with-divider">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Let's Connect!</h3>
+                    <p>I'm always interested in new opportunities and exciting projects. Feel free to reach out!</p>
+                    <div class="contact-details">
+                        <a href="mailto:phogatvishal2003@gmail.com" class="contact-item contact-link">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4>Email</h4>
+                                <p>phogatvishal2003@gmail.com</p>
+                            </div>
+                        </a>
+                        <a href="tel:+916367317348" class="contact-item contact-link">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div>
+                                <h4>Phone</h4>
+                                <p>+91-6367317348</p>
+                            </div>
+                        </a>
+                        <a href="https://www.linkedin.com/in/vishal-phogat/" target="_blank" class="contact-item contact-link">
+                            <div class="contact-icon">
+                                <i class="fab fa-linkedin-in"></i>
+                            </div>
+                            <div>
+                                <h4>LinkedIn</h4>
+                                <p>linkedin.com/in/vishal-phogat/</p>
+                            </div>
+                        </a>
+                        <a href="https://github.com/vishal-kumar8583" target="_blank" class="contact-item contact-link">
+                            <div class="contact-icon">
+                                <i class="fab fa-github"></i>
+                            </div>
+                            <div>
+                                <h4>GitHub</h4>
+                                <p>github.com/vishal-kumar8583</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form action="https://formspree.io/f/mqadnpqo" method="POST">
+                        <div class="form-group">
+                            <input type="text" name="name" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="subject" placeholder="Subject" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 Vishal Kumar. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/vishal-phogat/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/vishal-kumar8583" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="mailto:phogatvishal2003@gmail.com"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="lightbox" id="lightbox"><img alt="Certificate" src="" /></div>
+    
+    <!-- Resume Viewer Modal -->
+    <div class="resume-modal" id="resumeModal">
+        <div class="resume-modal-content">
+            <div class="resume-modal-header">
+                <h2><i class="fas fa-file-alt"></i> My Resume</h2>
+                <div class="resume-modal-controls">
+                    <button class="btn btn-open-tab" id="openInNewTabBtn">
+                        <i class="fas fa-external-link-alt"></i> Open in New Tab
+                    </button>
+                    <button class="btn btn-download" id="downloadResumeBtn">
+                        <i class="fas fa-download"></i> Download PDF
+                    </button>
+                    <button class="resume-modal-close" id="closeResumeModal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="resume-modal-body">
+                <div class="resume-viewer" id="resumeViewer">
+                    <iframe id="resumeIframe" src="" title="Vishal Kumar Resume" style="width: 100%; height: 100%; border: none;"></iframe>
+                </div>
+                </div>
+            </div>
+        </div>
+        <div class="resume-modal-overlay" id="resumeModalOverlay"></div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
