@@ -86,6 +86,32 @@ function addMobileEnhancements() {
 // Initialize mobile enhancements
 addMobileEnhancements();
 
+// Mobile-specific optimization for activities section
+if (window.innerWidth <= 768) {
+    // Pre-load activities section on mobile for faster scrolling
+    const activitiesSection = document.querySelector('.activities');
+    if (activitiesSection) {
+        const mobileActivitiesObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Immediately trigger all activity cards
+                    const activityCards = entry.target.querySelectorAll('.activity-card');
+                    activityCards.forEach((card, index) => {
+                        setTimeout(() => {
+                            card.classList.add('visible');
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        }, index * 50); // Much faster stagger on mobile
+                    });
+                    mobileActivitiesObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.05, rootMargin: '0px 0px 50px 0px' }); // Trigger earlier
+        
+        mobileActivitiesObserver.observe(activitiesSection);
+    }
+}
+
 // Re-initialize on window resize
 let resizeTimer;
 window.addEventListener('resize', () => {
@@ -125,10 +151,11 @@ window.addEventListener('scroll', () => {
     navbar.classList.toggle('scrolled', window.scrollY > 50);
 });
 
-// Enhanced Intersection Observer for scroll animations
+// Enhanced Intersection Observer for scroll animations with mobile optimization
+const isMobile = window.innerWidth <= 768;
 const observerOptions = {
-    threshold: 0.15,
-    rootMargin: '0px 0px -80px 0px'
+    threshold: isMobile ? 0.1 : 0.15,
+    rootMargin: isMobile ? '0px 0px -50px 0px' : '0px 0px -80px 0px'
 };
 
 const observer = new IntersectionObserver((entries) => {
@@ -178,7 +205,7 @@ document.querySelectorAll('section').forEach((section, index) => {
     observer.observe(section);
 });
 
-// Reveal child elements smoothly when they enter viewport
+// Reveal child elements smoothly when they enter viewport - mobile optimized
 const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -186,7 +213,10 @@ const revealObserver = new IntersectionObserver((entries) => {
             revealObserver.unobserve(entry.target);
         }
     });
-}, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+}, { 
+    threshold: isMobile ? 0.05 : 0.15, 
+    rootMargin: isMobile ? '0px 0px -5% 0px' : '0px 0px -10% 0px' 
+});
 
 document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
