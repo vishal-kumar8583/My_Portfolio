@@ -8,20 +8,90 @@ if ('scrollRestoration' in history) {
     history.scrollRestoration = 'manual';
 }
 
-// Mobile Navigation Toggle
+// Mobile Navigation Toggle with enhanced mobile experience
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
 
-hamburger.addEventListener('click', () => {
+// Enhanced mobile menu toggle
+function toggleMobileMenu() {
     hamburger.classList.toggle('active');
     navMenu.classList.toggle('active');
+    
+    // Prevent body scroll when menu is open (mobile UX improvement)
+    if (navMenu.classList.contains('active')) {
+        document.body.style.overflow = 'hidden';
+    } else {
+        document.body.style.overflow = '';
+    }
+}
+
+hamburger.addEventListener('click', toggleMobileMenu);
+
+// Close menu when tapping outside (mobile UX enhancement)
+document.addEventListener('click', (e) => {
+    if (navMenu.classList.contains('active') && 
+        !hamburger.contains(e.target) && 
+        !navMenu.contains(e.target)) {
+        toggleMobileMenu();
+    }
 });
 
 // Close mobile menu when clicking on a link
 document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', () => {
     hamburger.classList.remove('active');
     navMenu.classList.remove('active');
+    document.body.style.overflow = ''; // Restore body scroll
 }));
+
+// Mobile-specific enhancements
+function addMobileEnhancements() {
+    // Detect mobile device
+    const isMobile = window.innerWidth <= 768;
+    
+    if (isMobile) {
+        // Add touch feedback to interactive elements
+        const touchElements = document.querySelectorAll('.btn, .certificate-card, .project-card, .skill-category, .contact-item');
+        
+        touchElements.forEach(element => {
+            element.addEventListener('touchstart', function() {
+                this.style.transform = 'scale(0.98)';
+                this.style.transition = 'transform 0.1s ease';
+            }, { passive: true });
+            
+            element.addEventListener('touchend', function() {
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            }, { passive: true });
+        });
+        
+        // Smooth scroll behavior specifically for mobile
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    // Mobile-optimized smooth scroll
+                    target.scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'start',
+                        inline: 'nearest'
+                    });
+                }
+            });
+        });
+    }
+}
+
+// Initialize mobile enhancements
+addMobileEnhancements();
+
+// Re-initialize on window resize
+let resizeTimer;
+window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(addMobileEnhancements, 250);
+});
 
 // Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -172,11 +242,11 @@ function animateSkillCards() {
     });
 }
 
-// Create dynamic background particles
-function createScrollParticles() {
-    const particlesContainer = document.createElement('div');
-    particlesContainer.className = 'scroll-particles';
-    particlesContainer.style.cssText = `
+// Create engaging floating tech/programming icons
+function createFloatingShapes() {
+    const shapesContainer = document.createElement('div');
+    shapesContainer.className = 'floating-tech-icons';
+    shapesContainer.style.cssText = `
         position: fixed;
         top: 0;
         left: 0;
@@ -184,39 +254,140 @@ function createScrollParticles() {
         height: 100%;
         pointer-events: none;
         z-index: 1;
+        overflow: hidden;
     `;
-    document.body.appendChild(particlesContainer);
+    document.body.appendChild(shapesContainer);
     
-    for (let i = 0; i < 5; i++) {
-        const particle = document.createElement('div');
-        particle.style.cssText = `
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: var(--primary-500);
-            border-radius: 50%;
-            opacity: 0;
-        `;
-        particlesContainer.appendChild(particle);
-    }
-}
-
-// Animate particles on scroll
-function animateScrollParticles() {
-    const particles = document.querySelectorAll('.scroll-particles div');
-    const scrollProgress = window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight);
+    // Create subtle tech/programming related icons with theme-matching colors
+    const techIcons = [
+        { icon: 'fas fa-code', size: 16, color: 'rgba(99, 102, 241, 0.08)' }, // Code brackets
+        { icon: 'fab fa-react', size: 18, color: 'rgba(59, 130, 246, 0.08)' }, // React
+        { icon: 'fas fa-database', size: 14, color: 'rgba(139, 92, 246, 0.08)' }, // Database
+        { icon: 'fab fa-js-square', size: 15, color: 'rgba(99, 102, 241, 0.08)' }, // JavaScript
+        { icon: 'fas fa-laptop-code', size: 17, color: 'rgba(147, 51, 234, 0.08)' }, // Laptop with code
+        { icon: 'fab fa-node-js', size: 16, color: 'rgba(99, 102, 241, 0.08)' }, // Node.js
+        { icon: 'fab fa-git-alt', size: 15, color: 'rgba(139, 92, 246, 0.08)' }, // Git
+        { icon: 'fas fa-server', size: 14, color: 'rgba(59, 130, 246, 0.08)' }, // Server
+        { icon: 'fab fa-python', size: 16, color: 'rgba(147, 51, 234, 0.08)' }, // Python
+        { icon: 'fas fa-terminal', size: 15, color: 'rgba(99, 102, 241, 0.08)' }, // Terminal
+        { icon: 'fas fa-cog', size: 14, color: 'rgba(139, 92, 246, 0.08)' }, // Settings/Config
+        { icon: 'fas fa-cloud', size: 16, color: 'rgba(59, 130, 246, 0.08)' } // Cloud computing
+    ];
     
-    particles.forEach((particle, index) => {
-        const delay = index * 0.1;
-        const progress = Math.max(0, Math.min(1, scrollProgress - delay));
+    techIcons.forEach((iconConfig, index) => {
+        const icon = document.createElement('i');
+        icon.className = `floating-tech-icon ${iconConfig.icon}`;
         
-        if (progress > 0) {
-            particle.style.opacity = Math.sin(progress * Math.PI);
-            particle.style.left = `${10 + index * 20}%`;
-            particle.style.top = `${progress * 100}%`;
-        }
+        // Icon styling (very subtle)
+        icon.style.cssText = `
+            position: absolute;
+            font-size: ${iconConfig.size}px;
+            color: ${iconConfig.color};
+            opacity: 0;
+            text-shadow: 0 0 3px ${iconConfig.color};
+        `;
+        
+        shapesContainer.appendChild(icon);
     });
 }
+
+// Animate floating tech icons with smooth, organic movement
+function animateFloatingShapes() {
+    const techIcons = document.querySelectorAll('.floating-tech-icon');
+    
+    techIcons.forEach((icon, index) => {
+        // Random starting position (avoid edges for better visibility)
+        const startX = 50 + Math.random() * (window.innerWidth - 100);
+        const startY = 50 + Math.random() * (window.innerHeight - 100);
+        
+        // Unique animation parameters for each icon
+        const duration = 10000 + (index * 1500); // 10-25 seconds per cycle
+        const amplitude = 60 + (index * 20); // Different movement ranges
+        const startTime = Date.now() + (index * 800); // Staggered start
+        
+        function updateIcon() {
+            const elapsed = Date.now() - startTime;
+            const progress = (elapsed % duration) / duration;
+            
+            // Smooth floating movement using multiple sine waves
+            const x = startX + Math.sin(progress * Math.PI * 2 + index) * amplitude;
+            const y = startY + Math.cos(progress * Math.PI * 1.3 + index * 0.8) * (amplitude * 0.7);
+            
+            // Gentle rotation for some icons (not all, to keep them readable)
+            let rotation = 0;
+            if (index % 3 === 0) {
+                rotation = Math.sin(progress * Math.PI * 2) * 15; // Subtle wobble
+            }
+            
+            // Very subtle opacity pulsing
+            const opacity = 0.2 + Math.sin(progress * Math.PI * 2.5) * 0.1;
+            
+            // Subtle scale pulsing
+            const scale = 0.9 + Math.sin(progress * Math.PI * 3) * 0.2;
+            
+            // Apply transformations
+            icon.style.left = `${x}px`;
+            icon.style.top = `${y}px`;
+            icon.style.opacity = opacity;
+            icon.style.transform = `rotate(${rotation}deg) scale(${scale})`;
+            
+            requestAnimationFrame(updateIcon);
+        }
+        
+        requestAnimationFrame(updateIcon);
+    });
+}
+
+// Start floating shapes animation
+function startFloatingShapes() {
+    createFloatingShapes();
+    setTimeout(() => {
+        animateFloatingShapes();
+    }, 500); // Small delay to ensure DOM is ready
+}
+
+// Animate profile particles
+function animateProfileParticles() {
+    const profileParticles = document.querySelectorAll('.profile-particle');
+    
+    profileParticles.forEach((particle, index) => {
+        // Create unique animation for each particle
+        const duration = 2000 + (index * 500); // Different speeds
+        const delay = index * 200; // Staggered start
+        
+        function animateParticle() {
+            const startTime = Date.now() + delay;
+            
+            function updateParticle() {
+                const elapsed = Date.now() - startTime;
+                const progress = (elapsed % duration) / duration;
+                
+                // Circular movement with varying radius
+                const radius = 30 + (Math.sin(elapsed * 0.001) * 20);
+                const angle = progress * Math.PI * 2;
+                
+                // Calculate position
+                const x = Math.cos(angle + (index * 0.5)) * radius;
+                const y = Math.sin(angle + (index * 0.5)) * radius;
+                
+                // Apply transform
+                particle.style.transform = `translate(${x}px, ${y}px)`;
+                
+                // Pulsing opacity
+                const opacity = 0.3 + (Math.sin(elapsed * 0.003) * 0.4);
+                particle.style.opacity = opacity;
+                
+                requestAnimationFrame(updateParticle);
+            }
+            
+            requestAnimationFrame(updateParticle);
+        }
+        
+        animateParticle();
+    });
+}
+
+// Background particle animations removed for cleaner, more professional look
 
 // Typing effect for hero title
 function typeWriter(element, text, speed = 100) {
@@ -258,8 +429,11 @@ window.addEventListener('load', () => {
         console.log('Hero title loaded with proper HTML formatting');
     }
     
-    // Initialize scroll particles
-    createScrollParticles();
+    // Start floating shapes background animation
+    startFloatingShapes();
+    
+    // Animate profile particles around profile image
+    animateProfileParticles();
     
     // Add initial animation classes to elements
     initializeScrollAnimations();
@@ -325,9 +499,6 @@ window.addEventListener('scroll', () => {
         const rate = scrolled * -0.3;
         hero.style.transform = `translateY(${rate}px)`;
     }
-    
-    // Animate particles
-    animateScrollParticles();
     
     // Dynamic navbar styling based on scroll position
     const navbar = document.querySelector('.navbar');
@@ -1739,7 +1910,7 @@ document.addEventListener('keydown', (e) => {
     if (file) openLightbox(file);
 });
 
-// Add scroll to top functionality
+// Add scroll to top functionality with mobile optimization
 const scrollToTopBtn = document.createElement('button');
 scrollToTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
 scrollToTopBtn.className = 'scroll-to-top';
@@ -1761,6 +1932,15 @@ scrollToTopBtn.style.cssText = `
     transition: all 0.3s ease;
     z-index: 1000;
 `;
+
+// Make scroll-to-top button more mobile-friendly
+if (window.innerWidth <= 768) {
+    scrollToTopBtn.style.bottom = '20px';
+    scrollToTopBtn.style.right = '20px';
+    scrollToTopBtn.style.width = '56px';
+    scrollToTopBtn.style.height = '56px';
+    scrollToTopBtn.style.fontSize = '1.3rem';
+}
 
 document.body.appendChild(scrollToTopBtn);
 
