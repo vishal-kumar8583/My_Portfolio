@@ -1,11 +1,16 @@
-// Immediately reset scroll position on script load
-window.scrollTo(0, 0);
-document.documentElement.scrollTop = 0;
-document.body.scrollTop = 0;
-
-// Disable scroll restoration to prevent browser from remembering scroll position
+// Only disable scroll restoration for hash navigation, not for external links
 if ('scrollRestoration' in history) {
     history.scrollRestoration = 'manual';
+}
+
+// Only reset scroll on actual page refresh/reload, not on every script execution
+let isPageRefresh = performance.navigation.type === performance.navigation.TYPE_RELOAD || 
+                  performance.getEntriesByType('navigation')[0]?.type === 'reload';
+
+if (isPageRefresh) {
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
 }
 
 // Mobile Navigation Toggle with enhanced mobile experience
@@ -65,18 +70,22 @@ function addMobileEnhancements() {
             }, { passive: true });
         });
         
-        // Smooth scroll behavior specifically for mobile
+        // Smooth scroll behavior specifically for mobile (only for internal hash links)
         document.querySelectorAll('a[href^="#"]').forEach(link => {
             link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    // Mobile-optimized smooth scroll
-                    target.scrollIntoView({ 
-                        behavior: 'smooth', 
-                        block: 'start',
-                        inline: 'nearest'
-                    });
+                const href = this.getAttribute('href');
+                // Only handle internal hash links, not external links
+                if (href.startsWith('#') && href.length > 1) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        // Mobile-optimized smooth scroll
+                        target.scrollIntoView({ 
+                            behavior: 'smooth', 
+                            block: 'start',
+                            inline: 'nearest'
+                        });
+                    }
                 }
             });
         });
@@ -110,6 +119,52 @@ if (window.innerWidth <= 768) {
         
         mobileActivitiesObserver.observe(activitiesSection);
     }
+    
+    // Pre-load certificates section for faster scrolling
+    const certificatesSection = document.querySelector('.certificates');
+    if (certificatesSection) {
+        const mobileCertificatesObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Immediately trigger all certificate cards
+                    const certificateCards = entry.target.querySelectorAll('.certificate-card');
+                    certificateCards.forEach((card, index) => {
+                        setTimeout(() => {
+                            card.classList.add('visible');
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        }, index * 30); // Very fast stagger for certificates
+                    });
+                    mobileCertificatesObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.05, rootMargin: '0px 0px 100px 0px' }); // Trigger even earlier for certificates
+        
+        mobileCertificatesObserver.observe(certificatesSection);
+    }
+}
+
+// General certificates optimization for all devices
+const certificatesSection = document.querySelector('.certificates');
+if (certificatesSection) {
+    const certificatesObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Immediately trigger all certificate cards for faster loading
+                const certificateCards = entry.target.querySelectorAll('.certificate-card');
+                certificateCards.forEach((card, index) => {
+                    setTimeout(() => {
+                        card.classList.add('visible');
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, index * 50); // Faster stagger for all devices
+                });
+                certificatesObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px 50px 0px' }); // Trigger earlier
+    
+    certificatesObserver.observe(certificatesSection);
 }
 
 // Re-initialize on window resize
@@ -119,26 +174,30 @@ window.addEventListener('resize', () => {
     resizeTimer = setTimeout(addMobileEnhancements, 250);
 });
 
-// Smooth scrolling for navigation links
+// Smooth scrolling for navigation links (only for internal hash links)
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            // Use native smooth scrolling with CSS scroll-margin
-            target.scrollIntoView({ 
-                behavior: 'smooth', 
-                block: 'start'
-            });
-            
-            // Add a gentle emphasis animation when navigating to About
-            const isAbout = target.id === 'about';
-            if (isAbout) {
-                target.classList.add('visible');
-                setTimeout(() => {
-                    target.classList.add('highlight-section');
-                    setTimeout(() => target.classList.remove('highlight-section'), 800);
-                }, 300);
+        // Only handle internal hash links, not external links
+        const href = this.getAttribute('href');
+        if (href.startsWith('#') && href.length > 1) {
+            e.preventDefault();
+            const target = document.querySelector(href);
+            if (target) {
+                // Use native smooth scrolling with CSS scroll-margin
+                target.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'start'
+                });
+                
+                // Add a gentle emphasis animation when navigating to About
+                const isAbout = target.id === 'about';
+                if (isAbout) {
+                    target.classList.add('visible');
+                    setTimeout(() => {
+                        target.classList.add('highlight-section');
+                        setTimeout(() => target.classList.remove('highlight-section'), 800);
+                    }, 300);
+                }
             }
         }
     });
@@ -435,22 +494,14 @@ function typeWriter(element, text, speed = 100) {
     type();
 }
 
-// Force scroll to top on page load/refresh
-window.addEventListener('beforeunload', () => {
-    window.scrollTo(0, 0);
-});
-
-// Reset scroll position immediately on page load
-if ('scrollRestoration' in history) {
-    history.scrollRestoration = 'manual';
-}
-
-// Ensure page starts at top
+// Only reset scroll position on actual page refresh, not when navigating back
 window.addEventListener('load', () => {
-    // Force scroll to top immediately
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
-    window.scrollTo(0, 0);
+    // Only scroll to top on fresh page loads, not when navigating back from external links
+    if (isPageRefresh || document.referrer === '') {
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+        window.scrollTo(0, 0);
+    }
     
     const heroTitle = document.querySelector('.hero-title');
     if (heroTitle) {
@@ -1838,6 +1889,9 @@ document.querySelectorAll('.btn').forEach(btn => {
 // Add click effects to contact items
 document.querySelectorAll('.contact-link').forEach(link => {
     link.addEventListener('click', function(e) {
+        // Don't prevent default behavior for external links
+        // Just add visual feedback without interfering with navigation
+        
         // Add click animation
         this.style.transform = 'translateX(10px) scale(0.95)';
         
@@ -1845,18 +1899,21 @@ document.querySelectorAll('.contact-link').forEach(link => {
             this.style.transform = '';
         }, 150);
         
-        // Add success feedback
-        const originalText = this.querySelector('h4').textContent;
-        const originalP = this.querySelector('p').textContent;
-        
-        // Show loading state briefly
-        this.querySelector('h4').textContent = 'Opening...';
-        this.querySelector('p').textContent = 'Please wait';
-        
-        setTimeout(() => {
-            this.querySelector('h4').textContent = originalText;
-            this.querySelector('p').textContent = originalP;
-        }, 1000);
+        // Add success feedback only for external links (not email/phone which open apps)
+        const href = this.getAttribute('href');
+        if (href && (href.includes('linkedin.com') || href.includes('github.com'))) {
+            const originalText = this.querySelector('h4').textContent;
+            const originalP = this.querySelector('p').textContent;
+            
+            // Show loading state briefly
+            this.querySelector('h4').textContent = 'Opening...';
+            this.querySelector('p').textContent = 'Please wait';
+            
+            setTimeout(() => {
+                this.querySelector('h4').textContent = originalText;
+                this.querySelector('p').textContent = originalP;
+            }, 1000);
+        }
     });
     
     // Add hover sound effect simulation (visual feedback)
